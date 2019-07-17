@@ -1,0 +1,13 @@
+{
+    "name": "ssaran/vies",
+    "description": "EU Vat check api handler",
+    "require": {
+        "dragonbe/vies": "^2.1"
+    },
+    "authors": [
+        {
+            "name": "Sancar Saran",
+            "email": "sancar.saran@gmail.com"
+        }
+    ]
+}
