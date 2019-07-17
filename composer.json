@@ -9,5 +9,12 @@
             "name": "Sancar Saran",
             "email": "sancar.saran@gmail.com"
         }
-    ]
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ssaran\\Vies\\ViesServiceProvider"
+            ]
+        }
+    }
 }
