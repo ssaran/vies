@@ -68,14 +68,12 @@ class Base
                 $eMsg = implode("<br>", $validator->errors()->all());
                 throw new \Exception($eMsg);
             }
-            //$vatNumber = preg_replace("/[^A-Za-z0-9 ]/", '', $request->vat_number);
-            $vatNumber = $request->vat_number;
+
+            $vatNumber = preg_replace("/[^A-Za-z0-9 ]/", '', $request->vat_number);
             $vatResult = $vies->validateVat(
                 $request->country_code,           // Trader country code
                 $vatNumber   // Trader VAT ID
             );
-
-            echo print_r($vatResult->toArray(),true);
 
             if(!$vatResult->isValid()) {
                 $view = new View\DefaultNotValid();
