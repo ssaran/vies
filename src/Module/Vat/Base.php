@@ -75,6 +75,8 @@ class Base
                 $vatNumber   // Trader VAT ID
             );
 
+            //echo print_r($vatResult->toArray(),true);
+
             if(!$vatResult->isValid()) {
                 $view = new View\DefaultNotValid();
                 $_output =  $view->Render();
