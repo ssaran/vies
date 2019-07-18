@@ -21,7 +21,6 @@ class CreateViesVatLogTable extends Migration
             $table->string('country_code', 2);
             $table->string('vat_number', 50);
             $table->string('ip', 50);
-            $table->text('request');
             $table->text('response');
             $table->unsignedInteger('request_time');
         });

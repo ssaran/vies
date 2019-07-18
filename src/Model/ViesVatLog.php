@@ -17,7 +17,6 @@ class ViesVatLog extends Model
         'country_code',
         'vat_number',
         'ip',
-        'request',
         'response',
         'request_time'
     ];

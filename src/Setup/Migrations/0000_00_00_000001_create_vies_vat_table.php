@@ -21,6 +21,7 @@ class CreateViesVatTable extends Migration
             $table->string('vat_number', 50)->unique();
             $table->unsignedInteger('request_time');
             $table->string('trader_name', 191)->nullable();
+            $table->string('trader_address', 191)->nullable();
             $table->string('trader_company_type', 191)->nullable();
             $table->string('trader_street', 191)->nullable();
             $table->string('trader_post_code', 191)->nullable();

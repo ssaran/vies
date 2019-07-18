@@ -1,5 +1,10 @@
 <?php
 
+/*
+ *
+ * Base module for Vies vat module
+ *
+ */
 
 namespace Ssaran\Vies\Module\Vat;
 
@@ -15,17 +20,27 @@ use Illuminate\Support\Facades\Validator;
 class Base
 {
 
+    /*
+     * Generates form, it also accepts alternative form class for templating
+     */
     public function GetForm($postUrl,$formClass=false)
     {
-        if(!$formClass) {
-            $view = new \Ssaran\Vies\Module\Vat\View\DefaultForm();
-        } else {
-            $view = new $formClass;
-        }
+        try {
+            if(!$formClass) {
+                $view = new \Ssaran\Vies\Module\Vat\View\DefaultForm();
+            } else {
+                $view = new $formClass();
+            }
 
-        return $view->Render($postUrl);
+            return $view->Render($postUrl);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
+    /*
+     * Parses vat number check requests.
+     */
     public function CheckVatNumber(Request $request,$backUrl)
     {
         try {
@@ -50,6 +65,7 @@ class Base
                 $request->vat_number   // Trader VAT ID
             );
 
+
             if(!$vatResult->isValid()) {
                 $view = new View\DefaultNotValid();
                 $_output =  $view->Render();
@@ -58,17 +74,22 @@ class Base
                 $view = new View\DefaultValid();
                 $view->vatResult = $vatResult;
                 $_output =  $view->Render($backUrl);
-                $record = DBViesVat::RecordNew(
-                    $vatResult->getCountryCode(),
-                    $vatResult->getVatNumber(),
-                    strtotime($vatResult->getRequestDate()),
-                    $vatResult->getIdentifier(),
-                    $vatResult->getName(),
-                    $vatResult->getCompanyTypeMatch(),
-                    $vatResult->getStreetMatch(),
-                    $vatResult->getPostcodeMatch(),
-                    $vatResult->getCityMatch()
-                );
+
+                $record = DBViesVat::where('vat_number',$vatResult->getVatNumber())->first();
+                if(!$record) {
+                    $record = DBViesVat::RecordNew(
+                        $vatResult->getCountryCode(),
+                        $vatResult->getVatNumber(),
+                        time(),
+                        $vatResult->getIdentifier(),
+                        $vatResult->getName(),
+                        $vatResult->getAddress(),
+                        $vatResult->getCompanyTypeMatch(),
+                        $vatResult->getStreetMatch(),
+                        $vatResult->getPostcodeMatch(),
+                        $vatResult->getCityMatch()
+                    );
+                }
 
                 DBViesVatLog::RecordNew($request->country_code,$request->vat_number,time(),$request->ip(),json_encode($vatResult->toArray()),$record->id);
             }

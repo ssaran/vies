@@ -8,7 +8,7 @@ class DBViesVatLog extends \Ssaran\Vies\Model\ViesVatLog
 {
     public static function RecordNew($countryCode,$vatNumber,$requestDate,$clientIP,$response,$viesVatID=null)
     {
-        $r = new \Ssaran\Vies\Model\ViesVat();
+        $r = new \Ssaran\Vies\Model\ViesVatLog();
         $r->vies_vat_id  = $viesVatID;
         $r->country_code = $countryCode;
         $r->vat_number = $vatNumber;

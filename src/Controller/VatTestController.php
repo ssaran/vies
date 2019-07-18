@@ -1,5 +1,14 @@
 <?php
 
+/*
+ *
+ * This is thin controller.
+ * it just handle end points.
+ *
+ * all executed code come from module classes
+ *
+ */
+
 
 namespace Ssaran\Vies\Controller;
 
@@ -10,8 +19,6 @@ use App\Http\Controllers\Controller;
 
 class VatTestController extends Controller
 {
-
-
 
     public function index(Request $request)
     {
