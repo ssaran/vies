@@ -6,6 +6,10 @@ namespace Ssaran\Vies\Module\Vat\View;
 
 class DefaultForm
 {
+    /**
+     * @param $postUrl
+     * @return string
+     */
     public function Render($postUrl)
     {
         $_html = '

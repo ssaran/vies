@@ -396,7 +396,7 @@ class CheckVatResponse
         return  [
             'countryCode' => $this->getCountryCode(),
             'vatNumber'   => $this->getVatNumber(),
-            'requestDate' => $this->getRequestDate()->format('Y-m-d'),
+            'requestDate' => $this->getRequestDate()->format('Y-m-d H:i:s'),
             'valid'       => $this->isValid(),
             'name'        => $this->getName(),
             'address'     => $this->getAddress(),

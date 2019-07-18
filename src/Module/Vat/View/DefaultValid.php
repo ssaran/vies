@@ -8,6 +8,11 @@ class DefaultValid
 {
     /** @var \DragonBe\Vies\CheckVatResponse */
     public $vatResult;
+
+    /**
+     * @param $backUrl
+     * @return string
+     */
     public function Render($backUrl)
     {
         $_html = '

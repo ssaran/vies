@@ -256,7 +256,6 @@ class Vies
                 'requestDate' => date_create(),
                 'valid' => false,
             ];
-
             return new CheckVatResponse($params);
         }
 

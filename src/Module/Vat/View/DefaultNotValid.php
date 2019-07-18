@@ -6,6 +6,9 @@ namespace Ssaran\Vies\Module\Vat\View;
 
 class DefaultNotValid
 {
+    /**
+     * @return string
+     */
     public function Render()
     {
         $_html = '

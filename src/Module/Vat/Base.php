@@ -20,9 +20,14 @@ use Illuminate\Support\Facades\Validator;
 class Base
 {
 
-    /*
+    /**
      * Generates form, it also accepts alternative form class for templating
+     *
+     * @param string $postUrl
+     * @param string $formClass
+     * @return string
      */
+
     public function GetForm($postUrl,$formClass=false)
     {
         try {
@@ -38,8 +43,12 @@ class Base
         }
     }
 
-    /*
+    /**
      * Parses vat number check requests.
+     *
+     * @param Request $request
+     * @param string $backUrl
+     * @return string
      */
     public function CheckVatNumber(Request $request,$backUrl)
     {
@@ -59,17 +68,19 @@ class Base
                 $eMsg = implode("<br>", $validator->errors()->all());
                 throw new \Exception($eMsg);
             }
-
+            //$vatNumber = preg_replace("/[^A-Za-z0-9 ]/", '', $request->vat_number);
+            $vatNumber = $request->vat_number;
             $vatResult = $vies->validateVat(
                 $request->country_code,           // Trader country code
-                $request->vat_number   // Trader VAT ID
+                $vatNumber   // Trader VAT ID
             );
 
+            echo print_r($vatResult->toArray(),true);
 
             if(!$vatResult->isValid()) {
                 $view = new View\DefaultNotValid();
                 $_output =  $view->Render();
-                DBViesVatLog::RecordNew($request->country_code,$request->vat_number,time(),$request->ip(),json_encode($vatResult->toArray()),null);
+                DBViesVatLog::RecordNew($request->country_code,$vatNumber,time(),$request->ip(),json_encode($vatResult->toArray()),null);
             } else {
                 $view = new View\DefaultValid();
                 $view->vatResult = $vatResult;
