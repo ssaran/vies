@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Despatch\Vies\Model\DB;
+namespace Ssaran\Vies\Model\DB;
 
 
-class DBViesVat extends \Despatch\Vies\Model\ViesVat
+class DBViesVat extends \Ssaran\Vies\Model\ViesVat
 {
     public static function RecordNew($countryCode,$vatNumber,$requestDate,$identifier=null,$traderName=null,$raderCompanyType=null,$traderStreet=null,$traderPostCode=null,$traderCity=null)
     {
